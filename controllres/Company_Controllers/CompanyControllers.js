@@ -12,7 +12,7 @@ exports.CreateAccont = (req, res, next) => {
       return next(new Error("password not match", 400));
   
     //check The Existing user
-    Company.findOne({ officialemail:req.body.email}, (err, emp) => {
+    Company.findOne({ email:req.body.email}, (err, emp) => {
       if (emp) return next(new Error("user with given email already exist!", 400));
   
       // new Employee Object
@@ -45,8 +45,7 @@ exports.CreateAccont = (req, res, next) => {
 
 
   exports.CompanyLogin = async (req, res, next) => {
-    // taking a user
-    const employee = req.body;
+
   
     Company.findOne({email:req.body.email}, async function (err, cmpy) {
       // email is no valid
@@ -57,7 +56,6 @@ exports.CreateAccont = (req, res, next) => {
             400
           )
         );
-      console.log("mm",cmpy,"mm")
       const isMatch = await cmpy.comparepassword(req.body.password);
       // password does not match
       if (!isMatch) return next(new Error("Invaid credentials", 400));

@@ -4,6 +4,7 @@ const Error=require('./utils/ErrorHandler')
 const GloBalErrorHandler =require('./middleware/Error')
 const EmployeeRoutes =require('./api-routes/Employee-route/Employee-routes')
 const CompanyRoutes =require('./api-routes/Company-routes/Company-routes')
+const AdminRoutes =require('./api-routes/Admin-routes/admin-routes')
 const morgan =require('morgan')
 
 app.use(express.urlencoded({extended:true}))
@@ -16,6 +17,7 @@ app.use(morgan('dev'))
 // Hand The employee-routes
 app.use('/employee/accounts',EmployeeRoutes)
 app.use('/company/accounts',CompanyRoutes)
+app.use('/api/v1/admin/accounts',AdminRoutes)
 
 // Page Not Found Error
 app.use('*',(req,res,next)=>{
